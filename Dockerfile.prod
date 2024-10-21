@@ -1,7 +1,7 @@
 # pull basic node image from docker hub (alpine is a scaled down image for size)
 FROM node:21-alpine3.18
 # Working directory be app
-WORKDIR /usr/app/client
+WORKDIR /usr/app
 COPY package*.json ./
 # Install dependencies
 RUN npm install

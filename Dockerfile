@@ -1,5 +1,4 @@
-# pull basic node image from docker hub (alpine is a scaled down image for size)
-# this image includes node and npm ready to use
+# pull basic node image from docker hub (alpine is a scaled down image for size)x
 FROM node:21-alpine3.18
 # Working directory be app
 WORKDIR /usr/app
