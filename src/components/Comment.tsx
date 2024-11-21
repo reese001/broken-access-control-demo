@@ -5,11 +5,12 @@ import { Photo } from "@/tools/photos.model";
 import { useState } from "react";
 import { sendJSONData } from "@/tools/Toolkit";
 import LoadingOverlay from "@/components/LoadingOverlay";
+import type { Comment } from "@/tools/photos.model";
 
 interface CommentProps {
     selectedPhoto: Photo; // the photo for which the comments are being added
     isVisible: boolean; // flag to control the visibility of the comment form
-    updatePhotoComments: (photoId: string, comments: any[]) => void; // function to update the comments in the parent component
+    updatePhotoComments: (photoId: string, comments: Comment[]) => void; // function to update the comments in the parent component
 }
 
 export default function Comment({
@@ -29,7 +30,8 @@ export default function Comment({
         e.preventDefault(); // Prevent the default form submission behavior
         setIsLoading(true);
 
-        const newComment = {
+        const newComment: Comment = {
+            photoId: selectedPhoto.id,
             comment: commentText,
             author: author,
         };
