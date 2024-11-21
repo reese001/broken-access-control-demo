@@ -27,7 +27,7 @@ export default function Comment({
 
     // handle form submission
     const onSubmit = async (e: any) => {
-        e.preventDefault(); // Prevent the default form submission behavior
+        e.preventDefault();
         setIsLoading(true);
 
         const newComment: Comment = {
