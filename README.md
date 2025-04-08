@@ -41,7 +41,7 @@ This application intentionally contains the following vulnerabilities:
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:reese001/broken-access-control-demo.git
    cd broken-access-control-demo
    ```
 
