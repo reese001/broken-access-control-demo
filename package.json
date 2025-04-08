@@ -10,13 +10,14 @@
         "production": "next build && next start"
     },
     "dependencies": {
-        "mongo": "^0.1.0",
-        "mongodb": "^6.10.0",
-        "next": "14.1.4",
+        "@types/uuid": "^10.0.0",
+        "mongodb": "^6.3.0",
+        "next": "14.0.3",
         "react": "^18",
         "react-dom": "^18",
         "react-spinners": "^0.14.1",
-        "sanitize-html": "^2.13.1"
+        "sanitize-html": "^2.11.0",
+        "uuid": "^9.0.1"
     },
     "devDependencies": {
         "@types/node": "^20",

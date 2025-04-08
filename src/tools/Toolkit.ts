@@ -1,50 +1,19 @@
-// randomly generates a number between the range of low and high
-// arguments :
-// low : number - the lowest number in the range
-// high : number - the highest number in the range
-function getRandom(low: number = 1, high: number = 10) {
-    let randomNumber: number;
-    // calculate random number
-    randomNumber = Math.round(Math.random() * (high - low)) + low;
-    // returning value
-    return randomNumber;
-}
-
-// adds key event listener to any key and runs a function when that key is pressed
-// arguments :
-// functionToCall : function - the function to call when the key is pressed
-// keyToDetect : string - the key to detect
-function addKey(functionToCall: Function, myKeyCode: string = "Enter") {
-    // this example exposes issue with scoping and event handlers and how it is solved with arrow function
-
-    // wire up event listener
-    document.addEventListener("keydown", (e: KeyboardEvent) => {
-        // is the key released the provided key? Check keyCode via Event object
-        if (e.code === myKeyCode) {
-            // pressing the enter key will force some browsers to refresh
-            // this command stops the event from going further
-            e.preventDefault();
-            // call provided callback to do everything else that needs to be done
-            functionToCall();
-            // this also helps the event from propagating in some browsers
-            return false;
-        }
-    });
-}
-
 // retrieves JSON data from a URL and runs a function when the data is retrieved, passing along the JSON data as an argument
 // arguments :
 // retrieveURL : string - the URL to retrieve the JSON data from
 // cacheExpiry : number|false - amount of time in seconds until the cached data becomes stale and needs to be re-fetched from data source. Set to 10 minutes by default. Set to 0 to disable caching. Set to false to disable caching and have data fetched once at build time.
 // debug : boolean - whether to throw an error if one occurs (default is set to true)
+// headers : object - optional headers to include with the request
 async function getJSONData(
     retrieveScript: string,
     cacheExpiry: number | false = 600,
-    debug: boolean = true
+    debug: boolean = true,
+    headers: Record<string, string> = {}
 ) {
     try {
         const response: Response = await fetch(retrieveScript, {
             next: { revalidate: cacheExpiry },
+            headers
         });
         const data: any = await response.json();
         return data;
@@ -60,15 +29,20 @@ async function getJSONData(
 // sendURL : string - the URL to send the JSON data to
 // sendJSON : object - the JSON data to send
 // debug : boolean - whether to throw an error if one occurs (default is set to true)
+// headers : object - optional headers to include with the request
 async function sendJSONData(
     sendURL: string,
     sendJSON: any,
-    debug: boolean = true
+    debug: boolean = true,
+    headers: Record<string, string> = {}
 ) {
     try {
         const response = await fetch(sendURL, {
             method: "POST",
-            headers: { "content-type": "application/json" },
+            headers: { 
+                "content-type": "application/json",
+                ...headers 
+            },
             body: JSON.stringify(sendJSON),
             cache: "no-store",
         });
@@ -81,4 +55,4 @@ async function sendJSONData(
     }
 }
 
-export { getRandom, addKey, getJSONData, sendJSONData };
+export { getJSONData, sendJSONData };

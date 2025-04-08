@@ -10,7 +10,7 @@ services:
         volumes:
             - data-volume:/data/db
         environment:
-            MONGO_INITDB_DATABASE: "dbPhotoAlbum"
+            MONGO_INITDB_DATABASE: "securityDemo"
         ports:
             - "27017:27017"
         networks:
